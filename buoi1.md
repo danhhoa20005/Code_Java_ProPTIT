@@ -155,25 +155,79 @@ String name;
 }
 ```
 
-### 3. `Access Modifier`
 
-**Ý nghĩa**: Access modifier (các bộ điều chỉnh truy cập) xác định quyền truy cập của các thành viên lớp (biến, phương thức). Java hỗ trợ bốn loại access modifier:
-public: Có thể truy cập từ bất kỳ đâu.
-private: Chỉ có thể truy cập trong lớp đó.
-protected: Có thể truy cập trong cùng một lớp, lớp con, và trong cùng một package.
-default (không có từ khóa): Chỉ có thể truy cập trong cùng một package.
-**Ví dụ**:
+### 3 Access Modifiers trong Java
+
+Access modifier (bộ điều chỉnh truy cập) trong Java xác định quyền truy cập cho các thành viên của lớp, bao gồm các biến và phương thức. Java hỗ trợ bốn loại access modifier chính:
+
+1. **public**: Thành viên được đánh dấu là `public` có thể được truy cập từ bất kỳ đâu, bao gồm các lớp ở các package khác nhau.
+
+2. **private**: Thành viên được đánh dấu là `private` chỉ có thể được truy cập trong cùng một lớp. Điều này giúp bảo vệ dữ liệu và ngăn không cho các lớp khác truy cập trực tiếp.
+
+3. **protected**: Thành viên được đánh dấu là `protected` có thể được truy cập trong cùng một lớp, các lớp con (subclass), và trong cùng một package. Điều này cho phép các lớp con kế thừa và sử dụng các thành viên này.
+
+4. **default** (không có từ khóa): Nếu không chỉ định access modifier nào, thành viên sẽ có quyền truy cập mặc định. Điều này có nghĩa là thành viên chỉ có thể được truy cập trong cùng một package.
+
+## Ví dụ
 
 ```java
-public class Dog {
-private String name; // Chỉ có thể truy cập trong lớp Dog
+// Ví dụ về các access modifier trong Java
+class AccessModifiersExample {
+    public int publicVar = 10; // Có thể truy cập từ bất kỳ đâu
+    private int privateVar = 20; // Chỉ có thể truy cập trong lớp này
+    protected int protectedVar = 30; // Có thể truy cập trong cùng package và lớp con
+    int defaultVar = 40; // Có thể truy cập trong cùng package
 
-    public void setName(String name) {
-        this.name = name; // Phương thức setter
+    public void display() {
+        System.out.println("Public Variable: " + publicVar);
+        System.out.println("Private Variable: " + privateVar);
+        System.out.println("Protected Variable: " + protectedVar);
+        System.out.println("Default Variable: " + defaultVar);
     }
+}
 
+// Lớp con trong cùng một package
+class SubClass extends AccessModifiersExample {
+    public void show() {
+        System.out.println("Accessing variables from subclass:");
+        System.out.println("Public Variable: " + publicVar);
+        System.out.println("Protected Variable: " + protectedVar);
+        // Không thể truy cập privateVar và defaultVar nếu không trong cùng package
+    }
+}
+
+// Lớp khác trong cùng package
+class SamePackageClass {
+    public void access() {
+        AccessModifiersExample example = new AccessModifiersExample();
+        System.out.println("Accessing variables from same package:");
+        System.out.println("Public Variable: " + example.publicVar);
+        System.out.println("Protected Variable: " + example.protectedVar);
+        // Không thể truy cập privateVar và defaultVar
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        AccessModifiersExample example = new AccessModifiersExample();
+        example.display();
+
+        SubClass subClass = new SubClass();
+        subClass.show();
+
+        SamePackageClass samePackage = new SamePackageClass();
+        samePackage.access();
+    }
 }
 ```
+
+## Giải thích ví dụ
+
+- **AccessModifiersExample**: Chứa các biến với các access modifier khác nhau.
+- **SubClass**: Kế thừa từ `AccessModifiersExample` và có thể truy cập `public` và `protected` biến.
+- **SamePackageClass**: Cũng nằm trong cùng một package và có thể truy cập `public` và `protected` biến.
+
+Khi chạy chương trình, bạn sẽ thấy cách các access modifier ảnh hưởng đến khả năng truy cập của các thành viên lớp từ các lớp khác nhau.
 
 ### 4. `Getter và Setter`
 
