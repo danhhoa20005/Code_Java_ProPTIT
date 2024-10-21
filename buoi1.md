@@ -37,6 +37,7 @@ Package trong Java là một cách để nhóm các lớp liên quan lại với
 Java có các kiểu dữ liệu nguyên thủy như:
 
 ```
+java
 int x = 10; // Biến nguyên
 double y = 5.5; // Biến số thực
 boolean flag = true; // Biến boolean
